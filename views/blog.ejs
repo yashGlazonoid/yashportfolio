@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head') %>
+    <title>Blog - <%= locals.blog.title %> </title>
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 800px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        .comment-container {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        .comment-box {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <%- include('./partials/nav') %>
+
+    <div class="container mt-5">
+        <h1 class="text-center mb-4"><%= locals.blog.title %></h1>
+        <div class="card">
+            <img src="<%= locals.blog.coverImageURL %>" class="card-img-top" alt="Beautiful Image">
+            <div class="card-body">
+                <h5 class="card-title"><%= locals.blog.title %></h5>
+                <pre class="card-text">
+                    <%= locals.blog.body %>
+                </pre>
+    
+                <div class="container mt-4">
+                    <div class="d-flex align-items-center">
+                        <img src="<%= locals.blog.createdBy.profileImageURL %>" width="40px" height="40px" class="rounded-circle me-2" alt="">
+                        <div>
+                            <p class="mb-0"><strong><%= locals.blog.createdBy.fullName %></strong></p>
+                            <p class="text-muted"><small>Posted by <%= locals.blog.createdBy.username %></small></p>
+                        </div>
+                    </div>
+                </div>
+
+                <% if (locals.comments) { %>
+                    <div class="comment-container">
+                        <h4>Comments •(<%= comments.length %>)</h4>
+                        <% locals.comments.forEach(comment => { %>
+                            <div class="border p-3 mb-3">
+                                <strong><%= comment.createdBy.fullName %></strong>
+                                <p><%= comment.content %></p>
+                            </div>
+                        <% }) %>
+                    </div>
+                <% } %>
+                
+                <% if (locals.user) { %>
+                    <div class="comment-box">
+                        <h4>Add a Comment</h4>
+                        <form action="/blog/comment/<%= locals.blog._id %>" method="post">
+                            <div class="mb-3">
+                                <textarea placeholder="Enter your comment" class="form-control" id="commentText" name="content" rows="3" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Post Comment</button>
+                        </form>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+    
+    <%- include('./partials/script') %>
+</body>
+</html>

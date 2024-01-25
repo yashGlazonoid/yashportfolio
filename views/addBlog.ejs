@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head') %>
+    <title>Add New Blog</title>
+</head>
+<body>
+    <%- include('./partials/nav') %>
+
+    <div class="container mt-4">
+        <form action="/blog/" method="post" class="row g-3" enctype="multipart/form-data">
+
+            <div class="col-md-6">
+                <label for="coverImage" class="form-label">Cover Image</label>
+                <input type="file" name="coverImage" class="form-control" id="file">
+              </div>
+
+            <div class="col-md-6">
+              <label for="inputTitle4" class="form-label">Title</label>
+              <input type="text" name="title" class="form-control" id="title">
+            </div>
+
+            <div class="col-md-6">
+                <label for="floatingTextarea2">Comments</label>
+                <textarea name="body" class="form-control mt-2" id="floatingTextarea2" style="height: 100px"></textarea>
+            </div>
+        
+            
+            <div class="col-12">
+              <button type="submit" class="btn btn-primary">Add Blog</button>
+            </div>
+          </form>
+    </div>
+
+    
+
+
+    <%- include('./partials/script') %>
+</body>
+</html>
